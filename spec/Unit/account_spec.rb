@@ -6,4 +6,12 @@ RSpec.describe "Account" do
       expect(account.balance).to eq(0)
     end
   end
+
+  context "Deposit method" do
+    it "Following a deposit of £10, returns the current balance as £10" do
+      account = Account.new
+      account.deposit(10)
+      expect(account.balance).to eq(10)
+    end
+  end
 end
