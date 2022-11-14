@@ -35,5 +35,12 @@ RSpec.describe "Account" do
       account.withdraw(10)
       expect(account.balance).to eq(0)
     end
+
+    it "Allows the user to withdraw £5 when the balance is £10" do
+      account = Account.new
+      account.deposit(10)
+      account.withdraw(5) #May add withdrawal confirmation message with remaining balance: Withdrawn {withdrawal_amount}, current balance: {current_balance}
+      expect(account.balance).to eq(5)
+    end
   end
 end
