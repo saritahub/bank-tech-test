@@ -48,20 +48,20 @@ date || credit || debit || balance
 ```
 
 ## User stories
-- As a user
-- So that I can store my money in the bank
-- I’d like to be able to make a deposit (credit)
+As a user<br />
+So that I can store my money in the bank <br />
+I’d like to be able to make a deposit (credit)
 
-- As a user
-- So that I can withdraw money from the bank 
-- I’d like to be able to make a withdrawal (debit) 
+As a user<br />
+So that I can withdraw money from the bank <br />
+I’d like to be able to make a withdrawal (debit) 
 
-- As a user
-- So that I know how much money I have
-- I’d like to be able to view my balance 
+As a user<br />
+So that I know how much money I have<br />
+I’d like to be able to view my balance 
 
-- As a user
-- So that I can keep track of my deposits, withdrawals and balance
-- I’d like to be able to prints my bank statement with the transaction dates
+As a user<br />
+So that I can keep track of my deposits, withdrawals and balance<br />
+I’d like to be able to prints my bank statement with the transaction dates
 
 
