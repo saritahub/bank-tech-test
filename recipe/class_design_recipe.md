@@ -260,7 +260,14 @@ expect(account.withdraw(5)).to eq("Insufficient funds, current balance is 0")
 # Prompts the user to make a withdrawal between 0.01 - {current_balance}
 account = Account.new
 account.deposit(10)
-expect(account.withdraw(50)).to eq("Insufficient funds, current balance is 1. You can withdraw between 0.01 - 10")
+expect(account.withdraw(50)).to eq("Insufficient funds, current balance is 10. You can withdraw between 0.01 - 10")
+
+# Second test to check to see if the user has sufficient funds
+# If the user does not have sufficient funds, but the balance is above 0
+# Prompts the user to make a withdrawal between 0.01 - {current_balance}
+account = Account.new
+account.deposit(90)
+expect(account.withdraw(100)).to eq("Insufficient funds, current balance is 90. You can withdraw between 0.01 - 90")
 
 # Returns the transaction history (with dates)
 account = Account.new

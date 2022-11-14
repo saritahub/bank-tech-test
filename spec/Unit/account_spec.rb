@@ -56,6 +56,12 @@ RSpec.describe "Account" do
         account.deposit(10)
         expect(account.withdraw(50)).to eq("Insufficient funds, current balance is 10. You can withdraw between 0.01 - 10")
       end
+
+      it "When the balance is 90 and the user tries to withdraw 100, it prompts to withdraw under 90" do
+        account = Account.new
+        account.deposit(90)
+        expect(account.withdraw(100)).to eq("Insufficient funds, current balance is 90. You can withdraw between 0.01 - 90")
+      end
     end
   end
 end
