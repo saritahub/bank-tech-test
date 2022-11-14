@@ -21,5 +21,10 @@ RSpec.describe "Account" do
       expect(account.balance).to eq(20)
     end
 
+    it "Adds £50 to the balance through one deposit" do
+      account = Account.new
+      account.deposit(50)
+      expect(account.balance).to eq(50)
+    end
   end
 end
