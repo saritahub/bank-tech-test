@@ -27,4 +27,13 @@ RSpec.describe "Account" do
       expect(account.balance).to eq(50)
     end
   end
+
+  context "Withdraw method" do
+    it "Allows the user to withdraw £10 when the balance is £10" do
+      account = Account.new
+      account.deposit(10)
+      account.withdraw(10)
+      expect(account.balance).to eq(0)
+    end
+  end
 end
