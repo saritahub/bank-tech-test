@@ -106,11 +106,13 @@
 ```ruby
 class Account
   def initialize
+    @balance = 0
     # ...
   end
 
   def deposit(amount) 
     # Adds the deposit amount to the balance
+    # @balance + deposit(amount)
     # Returns message to user: Deposited {deposit_amount}, current balance: {current_balance}
   end
 
@@ -130,14 +132,20 @@ class Account
 
   def balance
     # Returns current balance
+    # return @balance 
   end
   
   def transaction_history 
     # Returns a list of deposits and withdrawals (with date and current balance)
   end
+  
+  def print_statement
+    #Prints the statement with transaction dates (recent date displayed first)
+  end
+  
 end
 
-class Track
+class Transaction
   def initialize
   end
 
@@ -162,38 +170,103 @@ end
 ```
 
 ## 3. Create Examples as Integration Tests
-
-_Create examples of the classes being used together in different situations and
-combinations that reflect the ways in which the system will be used._
-
+### Add more tests 
 ```ruby
-# EXAMPLE
+# Returns current balance as 0
+account = Account.new
+transaction = Transaction.new(account)
+expect(transaction.balance).to eq(0)
 
-# Gets all tracks
-library = MusicLibrary.new
-track_1 = Track.new("Carte Blanche", "Veracocha")
-track_2 = Track.new("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
-library.add(track_2)
-library.all # => [track_1, track_2]
+# Following a deposit of £10, returns the current balance as £10
+account = Account.new
+account.deposit(10)
+transaction = Transaction.new(account)
+expect(transaction.balance).to eq(10)
+
+# Following a deposit of £20, returns the current balance as £20
+account = Account.new
+account.deposit(20)
+transaction = Transaction.new(account)
+expect(transaction.balance).to eq(20)
+
+# Following deposit of £10 and withdrawal of £5, returns balance as £5
+account = Account.new
+account.deposit(10)
+account.withdraw(5)
+transaction = Transaction.new(account)
+expect(transaction.balance).to eq(5)
+
+# Returns the deposit transactions (along with date)
+account = Account.new
+account.deposit(20)
+transaction = Transaction.new(account) 
+expect(transaction.deposit).to eq("14/11/2022 Deposit: £20") #Change format
+
+# Returns the withdrawal transactions (along with date)
+account = Account.new
+account.deposit(20)
+account.withdrawal(10)
+transaction = Transaction.new(account)
+expect(transaction.withdrawal).to eq("14/11/2022 Deposit: £10") #Change format
+
+
 ```
 
 ## 4. Create Examples as Unit Tests
-
-_Create examples, where appropriate, of the behaviour of each relevant class at
-a more granular level of detail._
-
+### Account unit tests
 ```ruby
-# EXAMPLE
+# Returns the starting balance as zero (0)
+account = Account.new
+expect(account.balance).to eq(0)
 
-# Constructs a track
-track = Track.new("Carte Blanche", "Veracocha")
-track.title # => "Carte Blanche"
+# Adds £10 to the balance through one deposit
+account = Account.new
+account.deposit(10)
+expect(account.balance).to eq(10)
+
+# Adds £20 to the balance through two deposits
+account = Account.new
+account.deposit(10)
+account.deposit(10)
+expect(account.balance).to eq(20)
+
+# Adds £50 to the balance through one deposit
+account = Account.new
+account.deposit(50)
+expect(account.balance).to eq(50)
+
+# Allows the user to withdraw £10 when the balance is £10
+account = Account.new
+account.deposit(10)
+account.withdraw(10)
+expect(account.balance).to eq(0)
+
+# Allows the user to withdraw £5 when the balance is £10
+account = Account.new
+account.deposit(10)
+account.withdraw(5) #May add withdrawal confirmation message with remaining balance: Withdrawn {withdrawal_amount}, current balance: {current_balance}
+expect(account.balance).to eq(5)
+
+
+# Checks to see if the user has sufficient funds
+# If the user's balance is zero
+# Returns message to user: Insufficient funds, current balance is 0
+account = Account.new
+expect(account.withdraw(5)).to eq("Insufficient funds, current balance is 0")
+
+# Checks to see if the user has sufficient funds
+# If the user does not have sufficient funds, but the balance is above 0
+# Prompts the user to make a withdrawal between 0.01 - {current_balance}
+account = Account.new
+account.deposit(10)
+expect(account.withdraw(50)).to eq("Insufficient funds, current balance is 1. You can withdraw between 0.01 - 10")
+
+# Returns the transaction history (with dates)
+account = Account.new
+account.deposit(10) # Date: Hardcode or add today's date from Transaction class 
+account.withdraw(10) # Date: Hardcode or add today's date from Transaction class 
+expect(account.transaction_history).to eq("14/10/2022 Deposit: £10, Withdrawal: £10")
+
 ```
 
-_Encode each example as a test. You can add to the above list as you go._
-
-## 5. Implement the Behaviour
-
-_After each test you write, follow the test-driving process of red, green,
-refactor to implement the behaviour._
+### Transaction unit tests - may not be needed (integration tests covers this)
