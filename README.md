@@ -3,14 +3,15 @@
 ## Technologies and Design Principles:   
 This project was built using Ruby. 
 - To ensure readable and clean code, the SOLID principles were used throughout. 
-- TDD approach, testing technology is RSpec. 
+- TDD approach.
+- Testing technology is RSpec. 
 
 
-## To run this on your machine
-`git clone https://github.com/saritahub/bank-tech-test.git`
+### To run this on your machine
+`git clone https://github.com/saritahub/bank-tech-test.git` <br />
 `bundle install`
 
-### To the banking program 
+### To open the banking program 
 - Open your terminal and run: <br />
 `cd lib` <br />
 `irb -r ./bank-tech-test.rb`
@@ -48,20 +49,58 @@ date || credit || debit || balance
 ```
 
 ## User stories
-As a user<br />
-So that I can store my money in the bank <br />
+- [ ] 1<br />
+As a bank,<br />
+As we don't want to give away money,<br />
+Each user's account should start with a balance of zero
+
+### Deposit 
+- [ ] 2<br />
+As a user,<br />
+So that I can store my money in the bank, <br />
 I’d like to be able to make a deposit (credit)
 
-As a user<br />
-So that I can withdraw money from the bank <br />
+- [ ] 3<br />
+  As a user,<br />
+  So that I can keep track of how much money I deposit, <br />
+  I want my statements to display the deposit amount
+
+### Withdrawal
+- [ ] 4<br />
+As a user,<br />
+So that I can withdraw money from the bank, <br />
 I’d like to be able to make a withdrawal (debit) 
 
-As a user<br />
-So that I know how much money I have<br />
+- [ ] 5 <br />
+As a user, <br />
+So I don't go into debt, <br />
+I only want the withdrawal to take place if I have sufficient funds
+
+- [ ] 6 <br />
+  As a user, <br />
+  So I can keep on track of how much money I withdraw, <br />
+  I want my statements to display the withdrawal amount
+
+### Balance
+- [ ] 7<br />
+As a user,<br />
+So that I know how much money I have,<br />
 I’d like to be able to view my balance 
 
-As a user<br />
-So that I can keep track of my deposits, withdrawals and balance<br />
-I’d like to be able to prints my bank statement with the transaction dates
+- [ ] 8<br />
+  As a user,<br />
+  So that I can keep track of my transactions,<br />
+  I’d like to be able to view transaction dates
+
+- [ ] 9<br />
+  As a user,<br />
+  So that I can keep track of my account balance,<br />
+  I’d like to be able to view my balance after making a withdrawals and deposits
+
+### Print statement
+- [ ] 10<br />
+As a user,<br />
+So that I can keep track of my deposits, withdrawals and balance,<br />
+I’d like to be able to prints my bank statement with the transaction dates (recent date displayed first)
 
 
