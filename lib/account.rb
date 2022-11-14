@@ -13,6 +13,8 @@ class Account
 
     if @balance.sum <= 0
       return "Insufficient funds, current balance is 0."
+    elsif @withdrawal_amount > @balance.sum
+      return "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
     else
       @balance << (-@withdrawal_amount)
     end
