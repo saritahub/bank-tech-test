@@ -28,7 +28,7 @@ RSpec.describe "Account" do
     end
   end
 
-  context "Withdraw method" do
+  context "Withdraw method with sufficient funds" do
     it "Allows the user to withdraw £10 when the balance is £10" do
       account = Account.new
       account.deposit(10)
@@ -41,6 +41,19 @@ RSpec.describe "Account" do
       account.deposit(10)
       account.withdraw(5) #May add withdrawal confirmation message with remaining balance: Withdrawn {withdrawal_amount}, current balance: {current_balance}
       expect(account.balance).to eq(5)
+    end
+  end
+
+  context "Withdraw method with insufficient funds" do
+    context "Checks to see if the user has sufficient funds" do
+      it "If the user's balance is zero, returns message to user: Insufficient funds, current balance is 0" do
+        account = Account.new
+        expect(account.withdraw(5)).to eq("Insufficient funds, current balance is 0.")
+      end
+
+      xit "If the user does not have sufficient funds, but the balance is above 0, prompts the user to make a withdrwal between 0.01 and current balance" do
+
+      end
     end
   end
 end
