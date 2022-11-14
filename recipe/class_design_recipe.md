@@ -107,6 +107,7 @@
 class Account
   def initialize
     @balance = 0
+    
     # ...
   end
 
@@ -146,7 +147,7 @@ class Account
 end
 
 class Transaction
-  def initialize
+  def initialize(account)
   end
 
   def date
