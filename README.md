@@ -11,12 +11,12 @@ This project was built using Ruby.
 `bundle install`
 
 ### To the banking program 
-- Open your terminal and run: 
-`cd lib`
+- Open your terminal and run: <br />
+`cd lib` <br />
 `irb -r ./bank-tech-test.rb`
 
 ### To run the tests
-- Ensure you are in the main'bank-tech-test' folder
+- Ensure you are in the main 'bank-tech-test' folder
 - Open your terminal and run: 
 `rspec`
 
