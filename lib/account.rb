@@ -2,6 +2,8 @@ require 'date'
 class Account
   def initialize
     @balance = []
+    @deposit_amount = 0
+    @date_today = Date.today.to_s
   end
   def deposit(deposit_amount)
     @deposit_amount = deposit_amount
@@ -13,9 +15,9 @@ class Account
 
 
     if @balance.sum <= 0
-      return "Insufficient funds, current balance is 0."
+      "Insufficient funds, current balance is 0."
     elsif @withdrawal_amount > @balance.sum
-      return "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
+      "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
     else
       @balance << (-@withdrawal_amount)
     end
@@ -25,13 +27,15 @@ class Account
   end
 
   def transaction_history
-
-    return Date.today.to_s
+    if @deposit_amount > 0
+      return "Date: #{@date_today} Deposit: #{@deposit_amount}"
+    else
+      return "No deposit"
+    end
   end
 
-  # Add private method that extracts the date, then pass this onto transaction history
-  # Or move this to the Transaction class
-  # Then amend tests
+  # Move Date.today.to_s to the Transaction class - IDEAL!!
+  # Then amend tests (Integration)
 
 end
 

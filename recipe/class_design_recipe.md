@@ -152,7 +152,7 @@ class Transaction
 
   def date
     # Stores the transaction dates
-    # Or, just adds today's date 
+    # Or, just adds today's date using Date.today.to_s
   end
 
   def deposit
@@ -208,7 +208,7 @@ account = Account.new
 account.deposit(20)
 account.withdrawal(10)
 transaction = Transaction.new(account)
-expect(transaction.withdrawal).to eq("14/11/2022 Deposit: £10") #Change format
+expect(transaction.withdrawal).to eq("15/11/2022 Deposit: £20 15/11/2022 Withdrawal: £10") #Change format
 
 
 ```
