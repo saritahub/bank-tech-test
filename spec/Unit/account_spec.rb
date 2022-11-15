@@ -67,10 +67,16 @@ RSpec.describe "Account" do
   end
 
   context "Transaction history method" do
-    it "Transaction history returns today's date with the deposit amount" do
+    it "Transaction history returns today's date with the deposit amount of 10" do
       account = Account.new
       account.deposit(10)
       expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10")
+    end
+
+    it "Transaction history returns today's date with the deposit amount of 20" do
+      account = Account.new
+      account.deposit(20)
+      expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 20")
     end
   end
 end
