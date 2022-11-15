@@ -71,20 +71,21 @@ RSpec.describe 'Account' do
       it "Transaction history returns today's date with the deposit amount of 10" do
         account = Account.new
         account.deposit(10)
-        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10")
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"]])
       end
 
       it "Transaction history returns today's date with the deposit amount of 20" do
         account = Account.new
         account.deposit(20)
-        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 20")
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 20"]])
       end
 
       it "Multiple deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
         account = Account.new
         account.deposit(10)
         account.deposit(20)
-        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Deposit: 20")
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], 
+                                                   ["Date: #{Date.today} Deposit: 20"]])
       end
 
       it "Three deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
@@ -92,7 +93,8 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.deposit(20)
         account.deposit(1000)
-        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Deposit: 20 Date: #{Date.today.to_s} Deposit: 1000")
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], 
+                                                   ["Date: #{Date.today} Deposit: 20"], ["Date: #{Date.today} Deposit: 1000"]])
       end
     end
 
@@ -101,7 +103,7 @@ RSpec.describe 'Account' do
         account = Account.new
         account.deposit(10)
         account.withdraw(10)
-        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Withdrawal: 10")
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], ["Date: #{Date.today} Withdrawal: 10"]])
       end
 
       it "Multiple withdrawals: Returns the transaction history for deposit and withdrawal" do
@@ -109,7 +111,8 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.withdraw(5)
         account.withdraw(5)
-        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Withdrawal: 5 Date: #{Date.today.to_s} Withdrawal: 5")
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], 
+                                                   ["Date: #{Date.today} Withdrawal: 5"], ["Date: #{Date.today} Withdrawal: 5"]])
       end
     end
 
