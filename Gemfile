@@ -6,3 +6,5 @@ source "https://rubygems.org"
 
 gem "rspec", "~> 3.12"
 gem 'rubocop', group: 'development'
+
+gem 'timecop'

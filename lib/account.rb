@@ -1,3 +1,5 @@
+require 'date'
+require 'timecop'
 class Account
   def initialize
     @balance = []
@@ -23,4 +25,13 @@ class Account
     return @balance.sum
   end
 
+  def transaction_history
+    # time = Time.new
+    # time.strftime("%d/%m/%Y")
+    # # return Date.today
+    full_time = Timecop.freeze(Date.today)
+    return full_time.to_s[0..9] #Returns current date in format "YYYY-MM-DD"
+  end
+
 end
+
