@@ -14,7 +14,7 @@ This project was built using Ruby.
 ### To open the banking program 
 - Open your terminal and run: <br />
 `cd lib` <br />
-`irb -r ./bank-tech-test.rb`
+`irb -r ./account.rb`
 
 ### To run the tests
 - Ensure you are in the main 'bank-tech-test' folder

@@ -71,21 +71,21 @@ RSpec.describe 'Account' do
       it "Transaction history returns today's date with the deposit amount of 10" do
         account = Account.new
         account.deposit(10)
-        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"]])
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10 Balance: 10"]])
       end
 
       it "Transaction history returns today's date with the deposit amount of 20" do
         account = Account.new
         account.deposit(20)
-        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 20"]])
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 20 Balance: 20"]])
       end
 
       it "Multiple deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
         account = Account.new
         account.deposit(10)
         account.deposit(20)
-        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], 
-                                                   ["Date: #{Date.today} Deposit: 20"]])
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10 Balance: 10"],
+                                                   ["Date: #{Date.today} Deposit: 20 Balance: 30"]])
       end
 
       it "Three deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
@@ -93,41 +93,42 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.deposit(20)
         account.deposit(1000)
-        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], 
-                                                   ["Date: #{Date.today} Deposit: 20"], ["Date: #{Date.today} Deposit: 1000"]])
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10 Balance: 10"],
+                                                   ["Date: #{Date.today} Deposit: 20 Balance: 30"], ["Date: 2022-11-15 Deposit: 1000 Balance: 1030"]])
       end
     end
 
     context "Withdrawal with today's date" do
-      it "Returns the transaction history for deposit and withdrawal" do
+      it 'Returns the transaction history for deposit and withdrawal' do
         account = Account.new
         account.deposit(10)
         account.withdraw(10)
-        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], ["Date: #{Date.today} Withdrawal: 10"]])
+        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10 Balance: 10"], 
+                                                   ["Date: #{Date.today} Withdrawal: 10 Balance: 0"]])
       end
 
-      it "Multiple withdrawals: Returns the transaction history for deposit and withdrawal" do
+      it 'Multiple withdrawals: Returns the transaction history for deposit and withdrawal' do
         account = Account.new
         account.deposit(10)
         account.withdraw(5)
         account.withdraw(5)
-        expect(account.transaction_history).to eq([["Date: #{Date.today} Deposit: 10"], 
-                                                   ["Date: #{Date.today} Withdrawal: 5"], ["Date: #{Date.today} Withdrawal: 5"]])
+        expect(account.transaction_history).to eq( [["Date: #{Date.today} Deposit: 10 Balance: 10"], 
+                                                    ["Date: #{Date.today} Withdrawal: 5 Balance: 5"], ["Date: #{Date.today} Withdrawal: 5 Balance: 0"]])
       end
     end
 
-    it "If there is no deposit or withdrawal, the user will see this message" do
+    it 'If there is no deposit or withdrawal, the user will see this message' do
       account = Account.new
-      expect(account.transaction_history).to eq("No deposit or withdrawal")
+      expect(account.transaction_history).to eq('No deposit or withdrawal')
     end
   end
 
-  context "Print statement" do
-    it "Print statement returns unformatted transaction history" do
+  context 'Print statement' do
+    it 'Print statement returns unformatted transaction history' do
       account = Account.new
       account.deposit(10)
       account.withdraw(10)
-      expect(account.print_statement).to eq("Date: 2022-11-15 Deposit: 10 Date: 2022-11-15 Withdrawal: 10")
+      expect(account.print_statement).to eq("Date: 2022-11-15 Deposit: 10 Balance: 10 Date: 2022-11-15 Withdrawal: 10 Balance: 0")
     end
   end
 end

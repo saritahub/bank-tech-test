@@ -140,14 +140,15 @@ class Account
     # Returns a list of deposits and withdrawals (with date and current balance)
   end
   
-  def print_statement
-    #Prints the statement with transaction dates (recent date displayed first)
-  end
+  # def print_statement
+  #   #Prints the statement with transaction dates (recent date displayed first)
+  # end
   
 end
 
 class Transaction
-  def initialize(account)
+  def initialize(account, date_today, deposit, withdrawal, transaction_history)
+    @date_today = Date.today.to_s
   end
 
   def date
@@ -166,6 +167,10 @@ class Transaction
   def balance
     # Stores the balance after each transaction
     # Linked with the Account.balance 
+  end
+
+  def print_statement
+    #Prints the statement with transaction dates (recent date displayed first)
   end
 end
 ```

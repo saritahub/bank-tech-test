@@ -12,7 +12,7 @@ class Account
     @deposit_amount = deposit_amount
     @balance << @deposit_amount
 
-    @transaction_history << ["Date: #{@date_today} Deposit: #{@deposit_amount}"]
+    @transaction_history << ["Date: #{@date_today} Deposit: #{@deposit_amount} Balance: #{balance}"]
   end
 
   def withdraw(withdrawal_amount)
@@ -24,7 +24,7 @@ class Account
       "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
     else
       @balance << (-@withdrawal_amount)
-      @transaction_history << ["Date: #{@date_today} Withdrawal: #{@withdrawal_amount}"]
+      @transaction_history << ["Date: #{@date_today} Withdrawal: #{@withdrawal_amount} Balance: #{balance}"]
     end
   end
 
@@ -55,3 +55,36 @@ end
 # account = Account.new
 # account.deposit(10)
 # account.transaction_history
+#
+#
+# col_labels = { date: "Date", transaction: "Transaction", amount: "Amount" }
+#
+# arr = [{date: "2014-12-01", transaction: "Deposit", amount: "100"},
+#        {date: "2014-12-01", transaction: "Deposit", amount: "122"},
+#        {date: "2014-12-02", transaction: "Withdrawal", amount: "12"}]
+# private
+# def create_colomns
+# @columns = col_labels.each_with_object({}) { |(col,label),hash|
+#   hash[col] = { label: label,
+#              width: [arr.map { |g| g[col].size }.max, label.size].max } }
+# end
+#
+# private
+# def write_header
+#   puts "| #{ @columns.map { |_,g| g[:label].ljust(g[:width]) }.join(' || ') } |"
+# end
+# private
+# def write_divider
+#   puts "+-#{ @columns.map { |_,g| "-"*g[:width] }.join(" || ") }-+"
+# end
+# private
+# def write_line(h)
+#   str = h.keys.map { |k| h[k].ljust(@columns[k][:width]) }.join("  ||  ")
+#   puts " #{str} "
+# end
+#
+# write_divider
+# write_header
+# write_divider
+# arr.each { |h| write_line(h) }
+# write_divider
