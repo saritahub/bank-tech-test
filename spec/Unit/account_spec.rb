@@ -71,21 +71,22 @@ RSpec.describe 'Account' do
       it "Transaction history returns today's date with the deposit amount of 10" do
         account = Account.new
         account.deposit(10)
-        expect(account.transaction_history).to eq([["#{Date.today}", "Deposit", "10", "10"]])
+        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''}]
+                                               )
       end
 
       it "Transaction history returns today's date with the deposit amount of 20" do
         account = Account.new
         account.deposit(20)
-        expect(account.transaction_history).to eq([["#{Date.today}", "Deposit", "20", "20"]])
+        expect(account.transaction_history).to eq([{:balance=>'20', :credit=>'20', :date=>"#{Date.today}", :debit=>''}])
       end
 
       it "Multiple deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
         account = Account.new
         account.deposit(10)
         account.deposit(20)
-        expect(account.transaction_history).to eq([["#{Date.today}", "Deposit", "10", "10"],
-                                                   ["#{Date.today}", "Deposit","20", "30"]])
+        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
+                                                   {:balance=>'30', :credit=>'20', :date=>"#{Date.today}", :debit=>''}])
       end
 
       it "Three deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
@@ -93,8 +94,8 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.deposit(20)
         account.deposit(1000)
-        expect(account.transaction_history).to eq([["#{Date.today}", "Deposit", "10", "10"],
-                                                   ["#{Date.today}", "Deposit", "20","30"], ["#{Date.today}", "Deposit", "1000","1030"]])
+        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
+                                                   {:balance=>'30', :credit=>'20', :date=>"#{Date.today}", :debit=>''}, {:balance=>'1030', :credit=>'1000', :date=>"#{Date.today}", :debit=>''}])
       end
     end
 
@@ -103,8 +104,8 @@ RSpec.describe 'Account' do
         account = Account.new
         account.deposit(10)
         account.withdraw(10)
-        expect(account.transaction_history).to eq([["#{Date.today}", "Deposit", "10", "10"],
-                                                   ["#{Date.today}", "Withdrawal", "10", "0"]])
+        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
+                                                   {:balance=>'0', :credit=>'', :date=>"#{Date.today}", :debit=>'10'}])
       end
 
       it 'Multiple withdrawals: Returns the transaction history for deposit and withdrawal' do
@@ -112,8 +113,8 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.withdraw(5)
         account.withdraw(5)
-        expect(account.transaction_history).to eq( [["#{Date.today}", "Deposit", "10", "10"],
-                                                    ["#{Date.today}", "Withdrawal", "5", "5"], ["#{Date.today}", "Withdrawal", "5", "0"]])
+        expect(account.transaction_history).to eq( [{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
+                                                      {:balance=>'5', :credit=>'', :date=>"#{Date.today}", :debit=>'5'}, {:balance=>'0', :credit=>'', :date=>"#{Date.today}", :debit=>'5'}])
       end
     end
 
@@ -128,14 +129,8 @@ RSpec.describe 'Account' do
       account = Account.new
       account.deposit(10)
       account.withdraw(10)
-      expect(account.print_statement).to eq("#{Date.today}, Deposit, 10, 10, #{Date.today}, Withdrawal, 10, 0")
+      expect(account.print_statement).to eq("{:date=>\"#{Date.today}\", :credit=>\"10\", :debit=>\"\", :balance=>\"10\"}, {:date=>\"#{Date.today}\", :credit=>\"\", :debit=>\"10\", :balance=>\"0\"}")
     end
 
-    it "Print statement returns formatted transaction history" do
-      account = Account.new
-      account.deposit(10)
-      account.withdraw(10)
-      expect(account.print_statement).to eq("#{Date.today}, Deposit, 10, 10, #{Date.today}, Withdrawal, 10, 0")
-    end
   end
 end
