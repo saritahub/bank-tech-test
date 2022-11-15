@@ -49,56 +49,56 @@ date || credit || debit || balance
 ```
 
 ## User stories
-- [ ] 1<br />
+- [x] 1<br />
 As a bank,<br />
 As we don't want to give away money,<br />
 Each user's account should start with a balance of zero
 
 ### Deposit 
-- [ ] 2<br />
+- [x] 2<br />
 As a user,<br />
 So that I can store my money in the bank, <br />
 I’d like to be able to make a deposit (credit)
 
-- [ ] 3<br />
+- [x] 3<br />
   As a user,<br />
   So that I can keep track of how much money I deposit, <br />
   I want my statements to display the deposit amount
 
 ### Withdrawal
-- [ ] 4<br />
+- [x] 4<br />
 As a user,<br />
 So that I can withdraw money from the bank, <br />
 I’d like to be able to make a withdrawal (debit) 
 
-- [ ] 5 <br />
+- [x] 5 <br />
 As a user, <br />
 So I don't go into debt, <br />
 I only want the withdrawal to take place if I have sufficient funds
 
-- [ ] 6 <br />
+- [x] 6 <br />
   As a user, <br />
   So I can keep on track of how much money I withdraw, <br />
   I want my statements to display the withdrawal amount
 
 ### Balance
-- [ ] 7<br />
+- [x] 7<br />
 As a user,<br />
 So that I know how much money I have,<br />
 I’d like to be able to view my balance 
 
-- [ ] 8<br />
+- [x] 8<br />
   As a user,<br />
   So that I can keep track of my transactions,<br />
   I’d like to be able to view transaction dates
 
-- [ ] 9<br />
+- [x] 9<br />
   As a user,<br />
   So that I can keep track of my account balance,<br />
   I’d like to be able to view my balance after making a withdrawals and deposits
 
 ### Print statement
-- [ ] 10<br />
+- [x] 10<br />
 As a user,<br />
 So that I can keep track of my deposits, withdrawals and balance,<br />
 I’d like to be able to prints my bank statement with the transaction dates (recent date displayed first)

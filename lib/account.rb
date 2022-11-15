@@ -16,6 +16,7 @@ class Account
     @balance << @deposit_amount
 
     @transaction_history << { date: @date_today, credit: @deposit_amount.to_s, debit: '', balance: balance.to_s }
+    "You have deposited £#{@deposit_amount}, current balance: £#{balance}"
   end
 
   def withdraw(withdrawal_amount)
@@ -28,11 +29,16 @@ class Account
     else
       @balance << (-@withdrawal_amount)
       @transaction_history << { date: @date_today, credit: '', debit: @withdrawal_amount.to_s, balance: balance.to_s }
+      "You have withdrawn £#{@withdrawal_amount}, current balance: £#{balance}"
     end
   end
 
   def balance
     @balance.sum
+  end
+
+  def display_balance
+    "Your current balance is £#{balance}"
   end
 
   def transaction_history
@@ -41,10 +47,6 @@ class Account
     else
       'No deposit or withdrawal'
     end
-  end
-
-  def print_statement
-    @transaction_history.join(', ')
   end
 
   def create_columns
@@ -64,7 +66,7 @@ class Account
     puts str
   end
 
-  def format_table
+  def print_statement
     create_columns
     write_header
     @transaction_history.each { |hash| write_line(hash) }

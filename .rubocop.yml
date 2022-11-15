@@ -1,0 +1,5 @@
+AllCops:
+  Exclude:
+    - spec/Unit/account_spec.rb
+    - spec/spec_helper.rb
+    - Gemfile
