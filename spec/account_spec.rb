@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'account'
 require 'date'
 RSpec.describe 'Account' do
@@ -28,20 +30,20 @@ RSpec.describe 'Account' do
       expect(account.balance).to eq(50)
     end
 
-    context "Deposit amount raises error" do
-      it "Raises an error message if the input value is not an integer" do
+    context 'Deposit amount raises error' do
+      it 'Raises an error message if the deposit input value is not an integer' do
         account = Account.new
-        expect{account.deposit("50")}.to raise_error('Please enter a numerical value.')
+        expect { account.deposit('50') }.to raise_error('Please enter a numerical value.')
       end
 
-      it "Second test: Raises an error message if the input value is not an integer" do
+      it 'Second test: Raises an error message if the deposit input value is not an integer' do
         account = Account.new
-        expect{account.deposit("String")}.to raise_error('Please enter a numerical value.')
+        expect { account.deposit('String') }.to raise_error('Please enter a numerical value.')
       end
 
-      it "Third test: Raises an error message if the input value is not an integer" do
+      it 'Third test: Raises an error message if the deposit input value is not an integer' do
         account = Account.new
-        expect{account.deposit(["Array"])}.to raise_error('Please enter a numerical value.')
+        expect { account.deposit(['Array']) }.to raise_error('Please enter a numerical value.')
       end
     end
   end
@@ -57,8 +59,28 @@ RSpec.describe 'Account' do
     it 'Allows the user to withdraw £5 when the balance is £10' do
       account = Account.new
       account.deposit(10)
-      account.withdraw(5) #May add withdrawal confirmation message with remaining balance: Withdrawn {withdrawal_amount}, current balance: {current_balance}
+      account.withdraw(5)
       expect(account.balance).to eq(5)
+    end
+
+    context 'Withdrawal amount raises error' do
+      it 'Raises an error message if the withdrawal input value is not an integer' do
+        account = Account.new
+        account.deposit(100)
+        expect { account.withdraw('50') }.to raise_error('Please enter a numerical value.')
+      end
+
+      it 'Second test: Raises an error message if the withdrawal input value is not an integer' do
+        account = Account.new
+        account.deposit(100)
+        expect { account.withdraw('String') }.to raise_error('Please enter a numerical value.')
+      end
+
+      it 'Third test: Raises an error message if the withdrawal input value is not an integer' do
+        account = Account.new
+        account.deposit(100)
+        expect { account.withdraw(['Array']) }.to raise_error('Please enter a numerical value.')
+      end
     end
   end
 
@@ -88,22 +110,24 @@ RSpec.describe 'Account' do
       it "Transaction history returns today's date with the deposit amount of 10" do
         account = Account.new
         account.deposit(10)
-        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''}]
-                                               )
+        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s,
+                                                     debit: '' }])
       end
 
       it "Transaction history returns today's date with the deposit amount of 20" do
         account = Account.new
         account.deposit(20)
-        expect(account.transaction_history).to eq([{:balance=>'20', :credit=>'20', :date=>"#{Date.today}", :debit=>''}])
+        expect(account.transaction_history).to eq([{ balance: '20', credit: '20', date: Date.today.to_s,
+                                                     debit: '' }])
       end
 
       it "Multiple deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
         account = Account.new
         account.deposit(10)
         account.deposit(20)
-        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
-                                                   {:balance=>'30', :credit=>'20', :date=>"#{Date.today}", :debit=>''}])
+        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
+                                                   { balance: '30', credit: '20', date: Date.today.to_s,
+                                                     debit: '' }])
       end
 
       it "Three deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
@@ -111,8 +135,8 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.deposit(20)
         account.deposit(1000)
-        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
-                                                   {:balance=>'30', :credit=>'20', :date=>"#{Date.today}", :debit=>''}, {:balance=>'1030', :credit=>'1000', :date=>"#{Date.today}", :debit=>''}])
+        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
+                                                   { balance: '30', credit: '20', date: Date.today.to_s, debit: '' }, { balance: '1030', credit: '1000', date: Date.today.to_s, debit: '' }])
       end
     end
 
@@ -121,8 +145,9 @@ RSpec.describe 'Account' do
         account = Account.new
         account.deposit(10)
         account.withdraw(10)
-        expect(account.transaction_history).to eq([{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
-                                                   {:balance=>'0', :credit=>'', :date=>"#{Date.today}", :debit=>'10'}])
+        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
+                                                   { balance: '0', credit: '', date: Date.today.to_s,
+                                                     debit: '10' }])
       end
 
       it 'Multiple withdrawals: Returns the transaction history for deposit and withdrawal' do
@@ -130,8 +155,8 @@ RSpec.describe 'Account' do
         account.deposit(10)
         account.withdraw(5)
         account.withdraw(5)
-        expect(account.transaction_history).to eq( [{:balance=>'10', :credit=>'10', :date=>"#{Date.today}", :debit=>''},
-                                                      {:balance=>'5', :credit=>'', :date=>"#{Date.today}", :debit=>'5'}, {:balance=>'0', :credit=>'', :date=>"#{Date.today}", :debit=>'5'}])
+        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
+                                                   { balance: '5', credit: '', date: Date.today.to_s, debit: '5' }, { balance: '0', credit: '', date: Date.today.to_s, debit: '5' }])
       end
     end
 
@@ -146,14 +171,16 @@ RSpec.describe 'Account' do
       account = Account.new
       account.deposit(100)
       account.withdraw(75)
-      expect(account.print_statement).to eq([{:balance=>'100', :credit=>'100', :date=>'2022-11-15', :debit=>''}, {:balance=>'25', :credit=>'', :date=>'2022-11-15', :debit=>'75'}])
+      expect(account.print_statement).to eq([{ balance: '100', credit: '100', date: '2022-11-15', debit: '' },
+                                             { balance: '25', credit: '', date: '2022-11-15', debit: '75' }])
     end
 
     it 'Second test: Print statement returns formatted transaction history as a hash in reverse order' do
       account = Account.new
       account.deposit(500)
       account.withdraw(20)
-      expect(account.print_statement).to eq([{:balance=>'500', :credit=>'500', :date=>'2022-11-15', :debit=>''},  {:balance=>'480', :credit=>'', :date=>'2022-11-15', :debit=>'20'}])
+      expect(account.print_statement).to eq([{ balance: '500', credit: '500', date: '2022-11-15', debit: '' },
+                                             { balance: '480', credit: '', date: '2022-11-15', debit: '20' }])
     end
   end
 end
