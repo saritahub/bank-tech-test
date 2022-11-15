@@ -14,7 +14,7 @@ bundle install
 ```
 
 ## To open the banking program 
-Suggested walk-through: 
+**_Suggested walk-through:_** 
 
 1. Open your terminal and run: 
 ```shell
@@ -68,21 +68,26 @@ account.deposit("500")
 
 ### Full list of methods you can use
 
-| Method name     | Description                                           |
-|-----------------|-------------------------------------------------------|
-| deposit         | Deposit any amount above 0                            |
-| withdraw        | Withdraw any amount between 0 and the current balance |
-| display_balance | Displays the current balance in GBP (£)               |
-| print_statement | Prints all of the current transactions in reverse date order| 
+| Method name     | Description                                                  |
+|-----------------|--------------------------------------------------------------|
+| deposit         | Deposit any amount above 0                                   |
+| withdraw        | Withdraw any amount between 0 and the current balance        |
+| display_balance | Displays the current balance in GBP (£)                      |
+| print_statement | Prints all of the current transactions in reverse date order | 
 
+## Testing
 ### To run the tests
 - All tests are green. 
-- Note, the tests are using 'Date.now', so will always reflect today's date.
+- **Note:** the tests are using 'Date.now', so will always reflect today's date.
 - Ensure you are in the main 'bank-tech-test' folder.
 - Open your terminal and run: 
 ```shell
 rspec
 ```
+
+### Testing notes
+- Rubocop is set to ignore the spec file 
+
 
 # Project goals
 
