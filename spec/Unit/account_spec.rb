@@ -112,5 +112,19 @@ RSpec.describe 'Account' do
         expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Withdrawal: 5 Date: #{Date.today.to_s} Withdrawal: 5")
       end
     end
+
+    it "If there is no deposit or withdrawal, the user will see this message" do
+      account = Account.new
+      expect(account.transaction_history).to eq("No deposit or withdrawal")
+    end
+  end
+
+  context "Print statement" do
+    it "Print statement returns unformatted transaction history" do
+      account = Account.new
+      account.deposit(10)
+      account.withdraw(10)
+      expect(account.print_statement).to eq("Date: 2022-11-15 Deposit: 10 Date: 2022-11-15 Withdrawal: 10")
+    end
   end
 end

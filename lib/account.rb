@@ -27,19 +27,26 @@ class Account
     end
   end
   def balance
-    return @balance.sum
+     @balance.sum
   end
 
   def transaction_history
-    if @deposit_amount > 0 || @withdrawal_amount > 0
+    if @deposit_amount.positive? || @withdrawal_amount.positive?
       @transaction_history.join(" ")
     else
-      'No deposit'
+      'No deposit or withdrawal'
     end
   end
 
-  # Move Date.today.to_s to the Transaction class - IDEAL!!
+  def print_statement
+    @transaction_history.join(" ")
+  end
+
+  # Move Date.today.to_s to the Transaction class - IDEAL!! [15/10/2022 Deposit: £10, 15/10/2022: Withdrawal: £10]
   # Then amend tests (Integration)
+  # "Date: date_placeholder Withdrawal: 5 Date: date_placeholder Withdrawal: 5"
+  # array_of_rows.map { |date,transaction,amount| { Date: n, Transaction: g, Amount: a } }
+  # [:Date, :Transaction, :Amount].zip(['date_placeholder', 'Deposit', '10', 'date_placeholder_2', 'Withdrawal', '5']).to_h
 
 end
 

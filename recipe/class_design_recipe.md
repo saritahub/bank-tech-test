@@ -208,8 +208,7 @@ account = Account.new
 account.deposit(20)
 account.withdrawal(10)
 transaction = Transaction.new(account)
-expect(transaction.withdrawal).to eq("15/11/2022 Deposit: £20, 15/11/2022 Withdrawal: £10") #Change format
-
+expect(transaction.withdrawal).to eq("Date: #{Date.today.to_s} Withdrawal: £10") 
 
 ```
 
@@ -280,6 +279,14 @@ account = Account.new
 account.deposit(10) 
 account.withdraw(10) 
 expect(account.transaction_history).to eq("15/10/2022 Deposit: £10, 15/10/2022: Withdrawal: £10")
+
+
+# Experiment with the print_statement method within Account, then move this to Transaction class
+# Returns the transaction history in the correct format 
+account = Account.new
+account.deposit(10)
+account.withdraw(10)
+expect(account.print_statement).to eq("15/10/2022 Deposit: £10, 15/10/2022: Withdrawal: £10")
 
 ```
 
