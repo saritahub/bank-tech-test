@@ -1,5 +1,4 @@
 require 'date'
-require 'timecop'
 class Account
   def initialize
     @balance = []
@@ -26,12 +25,13 @@ class Account
   end
 
   def transaction_history
-    # time = Time.new
-    # time.strftime("%d/%m/%Y")
-    # # return Date.today
-    full_time = Timecop.freeze(Date.today)
-    return full_time.to_s[0..9] #Returns current date in format "YYYY-MM-DD"
+
+    return Date.today.to_s
   end
+
+  # Add private method that extracts the date, then pass this onto transaction history
+  # Or move this to the Transaction class
+  # Then amend tests
 
 end
 

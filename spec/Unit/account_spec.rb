@@ -69,8 +69,6 @@ RSpec.describe "Account" do
   context "Transaction history method" do
     it "Date functionality test: Returns today's date" do
       account = Account.new
-      account.deposit(10) # Date: Hardcode or add today's date from Transaction class
-      account.withdraw(10) # Date: Hardcode or add today's date from Transaction class
       expect(account.transaction_history).to eq(Date.today.to_s)
     end
   end
