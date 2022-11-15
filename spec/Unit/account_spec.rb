@@ -103,6 +103,14 @@ RSpec.describe 'Account' do
         account.withdraw(10)
         expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Withdrawal: 10")
       end
+
+      it "Multiple withdrawals: Returns the transaction history for deposit and withdrawal" do
+        account = Account.new
+        account.deposit(10)
+        account.withdraw(5)
+        account.withdraw(5)
+        expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10 Date: #{Date.today.to_s} Withdrawal: 5 Date: #{Date.today.to_s} Withdrawal: 5")
+      end
     end
   end
 end
