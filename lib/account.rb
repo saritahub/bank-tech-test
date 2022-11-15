@@ -4,10 +4,13 @@ class Account
     @balance = []
     @deposit_amount = 0
     @date_today = Date.today.to_s
+    @transaction_history = []
   end
   def deposit(deposit_amount)
     @deposit_amount = deposit_amount
     @balance << @deposit_amount
+
+    @transaction_history << "Date: #{@date_today} Deposit: #{@deposit_amount}"
   end
 
   def withdraw(withdrawal_amount)
@@ -15,7 +18,7 @@ class Account
 
 
     if @balance.sum <= 0
-      "Insufficient funds, current balance is 0."
+      'Insufficient funds, current balance is 0.'
     elsif @withdrawal_amount > @balance.sum
       "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
     else
@@ -28,9 +31,10 @@ class Account
 
   def transaction_history
     if @deposit_amount > 0
-      return "Date: #{@date_today} Deposit: #{@deposit_amount}"
+      @transaction_history.join(" ")
+      #"Date: #{@date_today} Deposit: #{@deposit_amount}"
     else
-      return "No deposit"
+      'No deposit'
     end
   end
 

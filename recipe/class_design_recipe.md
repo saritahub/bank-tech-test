@@ -208,7 +208,7 @@ account = Account.new
 account.deposit(20)
 account.withdrawal(10)
 transaction = Transaction.new(account)
-expect(transaction.withdrawal).to eq("15/11/2022 Deposit: £20 15/11/2022 Withdrawal: £10") #Change format
+expect(transaction.withdrawal).to eq("15/11/2022 Deposit: £20, 15/11/2022 Withdrawal: £10") #Change format
 
 
 ```
@@ -271,9 +271,15 @@ expect(account.withdraw(100)).to eq("Insufficient funds, current balance is 90. 
 
 # Returns the transaction history (with dates)
 account = Account.new
-account.deposit(10) # Date: Hardcode or add today's date from Transaction class 
-account.withdraw(10) # Date: Hardcode or add today's date from Transaction class 
-expect(account.transaction_history).to eq("14/10/2022 Deposit: £10, Withdrawal: £10")
+account.deposit(10) 
+account.deposit(20)  
+expect(account.transaction_history).to eq("Date: #{Date.today.to_s} Deposit: 10, Date: #{Date.today.to_s} Deposit: 20")
+
+# Returns the transaction history for deposit and withdrawal
+account = Account.new
+account.deposit(10) 
+account.withdraw(10) 
+expect(account.transaction_history).to eq("15/10/2022 Deposit: £10, 15/10/2022: Withdrawal: £10")
 
 ```
 
