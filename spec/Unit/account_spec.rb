@@ -131,6 +131,14 @@ RSpec.describe 'Account' do
       account.withdraw(10)
       expect(account.print_statement).to eq("{:date=>\"#{Date.today}\", :credit=>\"10\", :debit=>\"\", :balance=>\"10\"}, {:date=>\"#{Date.today}\", :credit=>\"\", :debit=>\"10\", :balance=>\"0\"}")
     end
+  end
 
+  context "Format table" do
+    it 'Format table returns formatted transaction history' do
+      account = Account.new
+      account.deposit(100)
+      account.withdraw(75)
+      expect(account.format_table).to eq([{:balance=>"100", :credit=>"100", :date=>"2022-11-15", :debit=>""}, {:balance=>"25", :credit=>"", :date=>"2022-11-15", :debit=>"75"}])
+    end
   end
 end

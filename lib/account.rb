@@ -45,19 +45,17 @@ class Account
   end
 
   def create_columns
-    col_labels = { date: 'Date', credit: 'Credit', debit: 'Debit', balance: 'Balance' }
-
-    @columns = col_labels.each_with_object({}) { |(col,label),h|
+    @columns = { date: 'Date', credit: 'Credit', debit: 'Debit', balance: 'Balance' }.each_with_object({}) { |(col,label),h|
       h[col] = { label: label,
                  width: [@transaction_history.map { |g| g[col].size }.max, label.size].max } }
   end
 
   def write_header
-    puts "#{ @columns.map { |_,g| g[:label].ljust(g[:width]) }.join(' || ') }"
+    puts @columns.map { |_,g| g[:label].ljust(g[:width]) }.join(' || ').to_s
   end
 
   def write_line(h)
-    str = h.keys.map { |k| h[k].ljust(@columns[k][:width]) }.join(" || ")
+    str = h.keys.map { |k| h[k].ljust(@columns[k][:width]) }.join(' || ')
     puts str
   end
 
