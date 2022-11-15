@@ -3,6 +3,7 @@ class Account
   def initialize
     @balance = []
     @deposit_amount = 0
+    @withdrawal_amount = 0
     @date_today = Date.today.to_s
     @transaction_history = []
   end
@@ -16,13 +17,13 @@ class Account
   def withdraw(withdrawal_amount)
     @withdrawal_amount = withdrawal_amount
 
-
     if @balance.sum <= 0
       'Insufficient funds, current balance is 0.'
     elsif @withdrawal_amount > @balance.sum
       "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
     else
       @balance << (-@withdrawal_amount)
+      @transaction_history << "Date: #{@date_today} Withdrawal: #{@withdrawal_amount}"
     end
   end
   def balance
@@ -30,9 +31,8 @@ class Account
   end
 
   def transaction_history
-    if @deposit_amount > 0
+    if @deposit_amount > 0 || @withdrawal_amount > 0
       @transaction_history.join(" ")
-      #"Date: #{@date_today} Deposit: #{@deposit_amount}"
     else
       'No deposit'
     end
