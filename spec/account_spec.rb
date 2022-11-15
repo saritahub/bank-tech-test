@@ -33,17 +33,17 @@ RSpec.describe 'Account' do
     context 'Deposit amount raises error' do
       it 'Raises an error message if the deposit input value is not an integer' do
         account = Account.new
-        expect { account.deposit('50') }.to raise_error('Please enter a numerical value.')
+        expect { account.deposit('50') }.to raise_error('Please enter a numerical value above 0.')
       end
 
       it 'Second test: Raises an error message if the deposit input value is not an integer' do
         account = Account.new
-        expect { account.deposit('String') }.to raise_error('Please enter a numerical value.')
+        expect { account.deposit('String') }.to raise_error('Please enter a numerical value above 0.')
       end
 
       it 'Third test: Raises an error message if the deposit input value is not an integer' do
         account = Account.new
-        expect { account.deposit(['Array']) }.to raise_error('Please enter a numerical value.')
+        expect { account.deposit(['Array']) }.to raise_error('Please enter a numerical value above 0.')
       end
     end
   end
@@ -181,6 +181,14 @@ RSpec.describe 'Account' do
       account.withdraw(20)
       expect(account.print_statement).to eq([{ balance: '500', credit: '500', date: '2022-11-15', debit: '' },
                                              { balance: '480', credit: '', date: '2022-11-15', debit: '20' }])
+    end
+
+    context "Raises error if there are no transactions" do
+      it "Raises error if the user has not entered any deposit" do
+        account = Account.new
+        expect{account.print_statement}.to raise_error("Current balance is £0, there are no transactions to display")
+      end
+
     end
   end
 end

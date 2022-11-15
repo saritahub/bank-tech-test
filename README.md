@@ -8,35 +8,81 @@ This project was built using Ruby.
 
 
 ### To run this on your machine
-`git clone https://github.com/saritahub/bank-tech-test.git` <br />
-`bundle install`
+```shell
+git clone https://github.com/saritahub/bank-tech-test.git
+bundle install
+```
 
 ## To open the banking program 
 Suggested walk-through: 
 
-1. Open your terminal and run: <br />
-`irb -r ./lib/account.rb` <br /> <br />
+1. Open your terminal and run: 
+```shell
+irb -r ./lib/account.rb
+```
+2. From here, you can create a new account:
+```shell
+account = Account.new
+```
 
-2. From here, you can create a new account:  <br />
-`account = Account.new`  <br /> <br />
-
-3. Then, confirm that the starting balance is £0:  <br />
-`account.display_balance` <br /> <br />
+3. Then, confirm that the starting balance is £0:  
+```shell
+account.display_balance
+```
   
-4. Then, you can make a deposit. For example:  <br />
-`account.deposit(100)` <br /> <br />
+4. Then, you can make a deposit. For example:  
+```shell
+account.deposit(100)
+```
 
-5. Then, you can make a withdrawal: <br />
-`account.withdrawal(25)` <br /> <br />
+5. Then, you can make a withdrawal: 
+```shell
+account.withdrawal(25)
+```
 
-6. Then, you can print the statement: <br />
-`account.print_statement` <br /> <br />
+6. Then, you can print the statement: 
+```shell
+account.print_statement
+```
 
+
+### Other tests you can run: 
+1. Attempt to withdraw when the balance is £0:
+```shell
+account = Account.new 
+account.withdraw(10)
+```
+
+2. Attempt to withdraw an amount that is higher than the current balance: 
+```shell
+account = Account.new
+account.deposit(500)
+account.withdraw(600)
+```
+
+3. Add a non-numerical (i.e not an Integer) value to the deposit or withdrawal amount:
+```shell
+account = Account.new
+account.deposit("500")
+```
+
+### Full list of methods you can use
+
+| Method name     | Description                                           |
+|-----------------|-------------------------------------------------------|
+| deposit         | Deposit any amount above 0                            |
+| withdraw        | Withdraw any amount between 0 and the current balance |
+| display_balance | Displays the current balance in GBP (£)               |
+| print_statement | Prints all of the current transactions in reverse date order| 
 
 ### To run the tests
-- Ensure you are in the main 'bank-tech-test' folder
+- All tests are green. 
+- Note, the tests are using 'Date.now', so will always reflect today's date.
+- Ensure you are in the main 'bank-tech-test' folder.
 - Open your terminal and run: 
-`rspec`
+```shell
+rspec
+```
 
 # Project goals
 
@@ -122,4 +168,4 @@ I’d like to be able to prints my bank statement with the transaction dates (re
 
 ## Class design 
 The class design recipe for Account and Transaction can be found [**here.**](https://github.com/saritahub/bank-tech-test/blob/main/recipe/class_design_recipe.md)
-- This describes the process of designing the class, with the initial unit and integration test set ups.
+- This describes the process of designing the class, with the initial unit test set-up.

@@ -12,7 +12,7 @@ class Account
   end
 
   def deposit(deposit_amount)
-    raise 'Please enter a numerical value.' if deposit_amount.class != Integer
+    raise 'Please enter a numerical value above 0.' if deposit_amount.class != Integer || deposit_amount == 0
 
     @deposit_amount = deposit_amount
     @balance << @deposit_amount
@@ -71,6 +71,7 @@ class Account
   end
 
   def print_statement
+    raise "Current balance is £#{balance}, there are no transactions to display" if @transaction_history.empty?
     create_columns
     write_header
     @transaction_history.each { |hash| write_line(hash) }
