@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'date'
+# Documentation for the Class Account
 class Account
   def initialize
     @balance = []
@@ -12,7 +15,7 @@ class Account
     @deposit_amount = deposit_amount
     @balance << @deposit_amount
 
-    @transaction_history << {date: @date_today.to_s, credit: @deposit_amount.to_s, debit: '', balance: balance.to_s}
+    @transaction_history << { date: @date_today, credit: @deposit_amount.to_s, debit: '', balance: balance.to_s }
   end
 
   def withdraw(withdrawal_amount)
@@ -24,7 +27,7 @@ class Account
       "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
     else
       @balance << (-@withdrawal_amount)
-      @transaction_history << {date: @date_today.to_s, credit: '', debit: @withdrawal_amount.to_s, balance: balance.to_s}
+      @transaction_history << { date: @date_today, credit: '', debit: @withdrawal_amount.to_s, balance: balance.to_s }
     end
   end
 
@@ -45,24 +48,25 @@ class Account
   end
 
   def create_columns
-    @columns = { date: 'Date', credit: 'Credit', debit: 'Debit', balance: 'Balance' }.each_with_object({}) { |(col,label),h|
+    @columns = { date: 'Date', credit: 'Credit', debit: 'Debit',
+                 balance: 'Balance' }.each_with_object({}) do |(col, label), h|
       h[col] = { label: label,
-                 width: [@transaction_history.map { |g| g[col].size }.max, label.size].max } }
+                 width: [@transaction_history.map { |g| g[col].size }.max, label.size].max }
+    end
   end
 
   def write_header
-    puts @columns.map { |_,g| g[:label].ljust(g[:width]) }.join(' || ').to_s
+    puts @columns.map { |_, g| g[:label].ljust(g[:width]) }.join(' || ').to_s
   end
 
-  def write_line(h)
-    str = h.keys.map { |k| h[k].ljust(@columns[k][:width]) }.join(' || ')
+  def write_line(hash)
+    str = hash.keys.map { |k| hash[k].ljust(@columns[k][:width]) }.join('|| ')
     puts str
   end
 
   def format_table
     create_columns
     write_header
-    @transaction_history.each { |h| write_line(h) }
+    @transaction_history.each { |hash| write_line(hash) }
   end
 end
-

@@ -133,12 +133,19 @@ RSpec.describe 'Account' do
     end
   end
 
-  context "Format table" do
-    it 'Format table returns formatted transaction history' do
+  context 'Format table' do
+    it 'Format table returns formatted transaction history as a hash in reverse order' do
       account = Account.new
       account.deposit(100)
       account.withdraw(75)
-      expect(account.format_table).to eq([{:balance=>"100", :credit=>"100", :date=>"2022-11-15", :debit=>""}, {:balance=>"25", :credit=>"", :date=>"2022-11-15", :debit=>"75"}])
+      expect(account.format_table).to eq([{:balance=>'100', :credit=>'100', :date=>'2022-11-15', :debit=>''}, {:balance=>'25', :credit=>'', :date=>'2022-11-15', :debit=>'75'}])
+    end
+
+    it 'Second test: Format table returns formatted transaction history as a hash in reverse order' do
+      account = Account.new
+      account.deposit(500)
+      account.withdraw(20)
+      expect(account.format_table).to eq([{:balance=>'500', :credit=>'500', :date=>'2022-11-15', :debit=>''},  {:balance=>'480', :credit=>'', :date=>'2022-11-15', :debit=>'20'}])
     end
   end
 end
