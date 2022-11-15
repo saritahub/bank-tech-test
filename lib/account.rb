@@ -12,6 +12,8 @@ class Account
   end
 
   def deposit(deposit_amount)
+    raise 'Please enter a numerical value.' if deposit_amount.class != Integer
+
     @deposit_amount = deposit_amount
     @balance << @deposit_amount
 
@@ -20,6 +22,8 @@ class Account
   end
 
   def withdraw(withdrawal_amount)
+    raise 'Please enter a numerical value.' if withdrawal_amount.class != Integer
+
     @withdrawal_amount = withdrawal_amount
 
     if @balance.sum <= 0

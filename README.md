@@ -11,10 +11,27 @@ This project was built using Ruby.
 `git clone https://github.com/saritahub/bank-tech-test.git` <br />
 `bundle install`
 
-### To open the banking program 
-- Open your terminal and run: <br />
-`cd lib` <br />
-`irb -r ./account.rb`
+## To open the banking program 
+Suggested walk-through: 
+
+1. Open your terminal and run: <br />
+`irb -r ./lib/account.rb` <br /> <br />
+
+2. From here, you can create a new account:  <br />
+`account = Account.new`  <br /> <br />
+
+3. Then, confirm that the starting balance is £0:  <br />
+`account.display_balance` <br /> <br />
+  
+4. Then, you can make a deposit. For example:  <br />
+`account.deposit(100)` <br /> <br />
+
+5. Then, you can make a withdrawal: <br />
+`account.withdrawal(25)` <br /> <br />
+
+6. Then, you can print the statement: <br />
+`account.print_statement` <br /> <br />
+
 
 ### To run the tests
 - Ensure you are in the main 'bank-tech-test' folder

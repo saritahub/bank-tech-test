@@ -27,6 +27,23 @@ RSpec.describe 'Account' do
       account.deposit(50)
       expect(account.balance).to eq(50)
     end
+
+    context "Deposit amount raises error" do
+      it "Raises an error message if the input value is not an integer" do
+        account = Account.new
+        expect{account.deposit("50")}.to raise_error('Please enter a numerical value.')
+      end
+
+      it "Second test: Raises an error message if the input value is not an integer" do
+        account = Account.new
+        expect{account.deposit("String")}.to raise_error('Please enter a numerical value.')
+      end
+
+      it "Third test: Raises an error message if the input value is not an integer" do
+        account = Account.new
+        expect{account.deposit(["Array"])}.to raise_error('Please enter a numerical value.')
+      end
+    end
   end
 
   context 'Withdraw method with sufficient funds' do

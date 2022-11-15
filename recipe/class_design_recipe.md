@@ -1,4 +1,4 @@
-# Multi-Class Planned Design Recipe
+# Class Design Recipe
 
 ## 1. Describe the Problem
 ## User stories extracted from README
@@ -61,44 +61,39 @@
 
 ### Class system with method names
 ```
-┌────────────────────────────────────────┐                          ┌────────────────────────────────────────┐
-│ Class Name                             │                          │ Class Name                             │
-│                                        │                          │                                        │
-│ Account                                │                          │ Transaction                            │
-├────────────────────────────────────────┤                          ├────────────────────────────────────────┤
-│                                        ├─────────────────────────►│                                        │
-│  Methods                               │                          │  Methods                               │
-│                                        │                          │                                        │
-│  Deposit                               │                          │  Date                                  │
-│  Withdraw                              │                          │  Deposit_amount                        │
-│  Balance                               │                          │  Withdrawal_amount                     │
-│  Transaction_history                   │                          │  Current_balance                       │
-│  Print_statement                       │                          │                                        │
-│                                        │                          │                                        │
-└────────────────────────────────────────┘                          └────────────────────────────────────────┘
+┌────────────────────────────────────────┐                         
+│ Class Name                             │                       
+│                                        │                       
+│ Account                                │                   
+├────────────────────────────────────────┤                        
+│                                        ├
+│  Methods                               │                        
+│                                        │                       
+│  Deposit                               │                        
+│  Withdraw                              │                         
+│  Balance                               │                          
+│  Transaction_history                   │                          
+│  Print_statement                       │                          
+│                                        │                        
+└────────────────────────────────────────┘                         
 ```
 
 ### Class responsibilities following the CRC model
 ```
-┌────────────────────────────────────────┐                          ┌────────────────────────────────────────┐
-│ Class Name                             │                          │ Class Name                             │
-│                                        │                          │                                        │
-│ Account                                │                          │ Transaction                            │
-├────────────────────────────────────────┤                          ├────────────────────────────────────────┤
-│                                        ├─────────────────────────►│                                        │
-│  Responsibilities                      │                          │  Responsibilities                      │
-│                                        │                          │                                        │
-│  Places the deposit                    │                          │  Knows the date                        │
-│  Places the withdrawal                 │                          │  Knows the deposit amount              │
-│  Knows the current balance             │                          │  Knows the withdrawal amount           │   
-│  Stores the transaction history        │                          │  Knows the balance after each          │
-│  Can print the statement               │                          │  transaction                           │
-│                                        │                          │                                        │
-│                                        │                          │                                        │
-│  Collaborator                          │                          │                                        │
-│  Transaction                           │                          │                                        │
-│                                        │                          │                                        │
-└────────────────────────────────────────┘                          └────────────────────────────────────────┘ 
+┌────────────────────────────────────────┐                          
+│                                        │                          
+│ Account                                │                          
+├────────────────────────────────────────┤                         
+│                                        ├
+│  Responsibilities                      │                         
+│                                        │                      
+│  Places the deposit                    │                         
+│  Places the withdrawal                 │                          
+│  Knows the current balance             │                          
+│  Stores the transaction history        │                         
+│  Can print the statement               │                                                  
+│                                        │                         
+└────────────────────────────────────────┘                          
 
 ```
 
@@ -140,81 +135,11 @@ class Account
     # Returns a list of deposits and withdrawals (with date and current balance)
   end
   
-  # def print_statement
-  #   #Prints the statement with transaction dates (recent date displayed first)
-  # end
-  
-end
-
-class Transaction
-  def initialize(account, date_today, deposit, withdrawal, transaction_history)
-    @date_today = Date.today.to_s
-  end
-
-  def date
-    # Stores the transaction dates
-    # Or, just adds today's date using Date.today.to_s
-  end
-
-  def deposit
-    # Stores the deposit transaction (along with date)
-  end
-
-  def withdrawal
-    # Stores the withdrawal transaction (along with date)
-  end
-
-  def balance
-    # Stores the balance after each transaction
-    # Linked with the Account.balance 
-  end
-
   def print_statement
     #Prints the statement with transaction dates (recent date displayed first)
   end
+  
 end
-```
-
-## 3. Create Examples as Integration Tests
-### Add more tests 
-```ruby
-# Returns current balance as 0
-account = Account.new
-transaction = Transaction.new(account)
-expect(transaction.balance).to eq(0)
-
-# Following a deposit of £10, returns the current balance as £10
-account = Account.new
-account.deposit(10)
-transaction = Transaction.new(account)
-expect(transaction.balance).to eq(10)
-
-# Following a deposit of £20, returns the current balance as £20
-account = Account.new
-account.deposit(20)
-transaction = Transaction.new(account)
-expect(transaction.balance).to eq(20)
-
-# Following deposit of £10 and withdrawal of £5, returns balance as £5
-account = Account.new
-account.deposit(10)
-account.withdraw(5)
-transaction = Transaction.new(account)
-expect(transaction.balance).to eq(5)
-
-# Returns the deposit transactions (along with date)
-account = Account.new
-account.deposit(20)
-transaction = Transaction.new(account) 
-expect(transaction.deposit).to eq("14/11/2022 Deposit: £20") #Change format
-
-# Returns the withdrawal transactions (along with date)
-account = Account.new
-account.deposit(20)
-account.withdrawal(10)
-transaction = Transaction.new(account)
-expect(transaction.withdrawal).to eq("Date: #{Date.today.to_s} Withdrawal: £10") 
-
 ```
 
 ## 4. Create Examples as Unit Tests
@@ -286,7 +211,6 @@ account.withdraw(10)
 expect(account.transaction_history).to eq("15/10/2022 Deposit: £10, 15/10/2022: Withdrawal: £10")
 
 
-# Experiment with the print_statement method within Account, then move this to Transaction class
 # Returns the transaction history in the correct format 
 account = Account.new
 account.deposit(10)
@@ -294,5 +218,3 @@ account.withdraw(10)
 expect(account.print_statement).to eq("15/10/2022 Deposit: £10, 15/10/2022: Withdrawal: £10")
 
 ```
-
-### Transaction unit tests - may not be needed (integration tests covers this)
