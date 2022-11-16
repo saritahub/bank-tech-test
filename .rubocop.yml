@@ -1,7 +1,8 @@
 AllCops:
   SuggestExtensions: false
+
   Exclude:
-    - spec/Unit/account_spec.rb
+    - spec/account_spec.rb
     - spec/spec_helper.rb
     - Gemfile
-    -
+

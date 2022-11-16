@@ -5,7 +5,8 @@ This project was built using Ruby.
 - To ensure readable and clean code, the SOLID principles were used throughout. 
 - TDD approach.
 - Testing technology is RSpec. 
-
+- Rubocop implemented with no offences </br>
+![](images/rubocop_image.jpeg)
 
 ### To run this on your machine
 ```shell
@@ -44,6 +45,7 @@ account.withdrawal(25)
 ```shell
 account.print_statement
 ```
+![](images/Account_Demo.jpeg)
 
 
 ### Other tests you can run: 
@@ -88,7 +90,7 @@ rspec
 ### Testing notes
 - Rubocop is set to ignore the spec file 
 
-
+![](images/RSpec_tests.jpeg)
 # Project goals
 
 ## Task
@@ -165,8 +167,8 @@ I’d like to be able to view my balance
   So that I can keep track of my account balance,<br />
   I’d like to be able to view my balance after making a withdrawals and deposits
 
-### Print statement
-- [x] 10<br />
+### Print statement* [see below](Known-bug:-print_statement method)
+- [ ] 10<br />
 As a user,<br />
 So that I can keep track of my deposits, withdrawals and balance,<br />
 I’d like to be able to prints my bank statement with the transaction dates (recent date displayed first)
@@ -174,3 +176,16 @@ I’d like to be able to prints my bank statement with the transaction dates (re
 ## Class design 
 The class design recipe for Account can be found [**here.**](https://github.com/saritahub/bank-tech-test/blob/main/recipe/class_design_recipe.md)
 - This describes the process of designing the class, with the initial unit test set-up.
+
+## Approach 
+This program was set up to mimic the actions of a bank account. Users can run the application locally on their terminal. 
+
+The app consists of one Class, Account. Users can create an account, make deposits and withdrawals and print their statement. 
+
+Initially, I planned to create multiple classes to distribute the responsibilities. However, I ran out of time and did not implement this.
+
+### Known bug: print_statement method 
+- The print_statement method successfully prints out the list of transactions (date, credit, debit and balance) in reverse date order.
+- However, it also prints out the array of hashes (which the table is constructed from). Due to time constraints I was unable to fix this bug.
+- This also means when the RSpec tests are run, the table is printed.
+![](images/print_statement_bug.jpeg)
