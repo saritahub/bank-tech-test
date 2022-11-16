@@ -172,5 +172,5 @@ So that I can keep track of my deposits, withdrawals and balance,<br />
 I’d like to be able to prints my bank statement with the transaction dates (recent date displayed first)
 
 ## Class design 
-The class design recipe for Account and Transaction can be found [**here.**](https://github.com/saritahub/bank-tech-test/blob/main/recipe/class_design_recipe.md)
+The class design recipe for Account can be found [**here.**](https://github.com/saritahub/bank-tech-test/blob/main/recipe/class_design_recipe.md)
 - This describes the process of designing the class, with the initial unit test set-up.

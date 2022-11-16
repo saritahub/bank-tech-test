@@ -52,11 +52,21 @@ class Account
     end
   end
 
+  def print_statement
+    raise "Current balance is £#{balance}, there are no transactions to display" if @transaction_history.empty?
+
+    create_columns
+    write_header
+    @transaction_history.each { |hash| write_line(hash) }
+  end
+
+  private
+
   def create_columns
     @columns = { date: 'Date', credit: 'Credit', debit: 'Debit',
-                 balance: 'Balance' }.each_with_object({}) do |(col, label), h|
-      h[col] = { label: label,
-                 width: [@transaction_history.map { |g| g[col].size }.max, label.size].max }
+                 balance: 'Balance' }.each_with_object({}) do |(col, label), hash|
+      hash[col] = { label: label,
+                    width: [@transaction_history.map { |g| g[col].size }.max, label.size].max }
     end
   end
 
@@ -67,13 +77,5 @@ class Account
   def write_line(hash)
     str = hash.keys.map { |k| hash[k].ljust(@columns[k][:width]) }.join('|| ')
     puts str
-  end
-
-  def print_statement
-    raise "Current balance is £#{balance}, there are no transactions to display" if @transaction_history.empty?
-
-    create_columns
-    write_header
-    @transaction_history.each { |hash| write_line(hash) }
   end
 end
