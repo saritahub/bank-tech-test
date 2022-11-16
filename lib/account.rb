@@ -12,7 +12,7 @@ class Account
   end
 
   def deposit(deposit_amount)
-    raise 'Please enter a numerical value above 0.' if deposit_amount.class != Integer || deposit_amount.negative?
+    raise 'Please enter a numerical value above 0.01.' if deposit_amount.class != Integer || deposit_amount.negative?
 
     @deposit_amount = deposit_amount
     @balance << @deposit_amount
@@ -22,7 +22,7 @@ class Account
   end
 
   def withdraw(withdraw_amount)
-    raise 'Please enter a numerical value.' if withdraw_amount.class != Integer || withdraw_amount.negative?
+    raise 'Please enter a numerical value above 0.01.' if withdraw_amount.class != Integer || withdraw_amount.negative?
 
     @withdraw_amount = withdraw_amount
 
