@@ -105,67 +105,6 @@ RSpec.describe 'Account' do
     end
   end
 
-  context 'Transaction history method' do
-    context "Deposit with today's date" do
-      it "Transaction history returns today's date with the deposit amount of 10" do
-        account = Account.new
-        account.deposit(10)
-        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s,
-                                                     debit: '' }])
-      end
-
-      it "Transaction history returns today's date with the deposit amount of 20" do
-        account = Account.new
-        account.deposit(20)
-        expect(account.transaction_history).to eq([{ balance: '20', credit: '20', date: Date.today.to_s,
-                                                     debit: '' }])
-      end
-
-      it "Multiple deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
-        account = Account.new
-        account.deposit(10)
-        account.deposit(20)
-        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
-                                                   { balance: '30', credit: '20', date: Date.today.to_s,
-                                                     debit: '' }])
-      end
-
-      it "Three deposits: Transaction history returns today's date with the deposit amounts of 10 and 20" do
-        account = Account.new
-        account.deposit(10)
-        account.deposit(20)
-        account.deposit(1000)
-        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
-                                                   { balance: '30', credit: '20', date: Date.today.to_s, debit: '' }, { balance: '1030', credit: '1000', date: Date.today.to_s, debit: '' }])
-      end
-    end
-
-    context "Withdrawal with today's date" do
-      it 'Returns the transaction history for deposit and withdrawal' do
-        account = Account.new
-        account.deposit(10)
-        account.withdraw(10)
-        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
-                                                   { balance: '0', credit: '', date: Date.today.to_s,
-                                                     debit: '10' }])
-      end
-
-      it 'Multiple withdrawals: Returns the transaction history for deposit and withdrawal' do
-        account = Account.new
-        account.deposit(10)
-        account.withdraw(5)
-        account.withdraw(5)
-        expect(account.transaction_history).to eq([{ balance: '10', credit: '10', date: Date.today.to_s, debit: '' },
-                                                   { balance: '5', credit: '', date: Date.today.to_s, debit: '5' }, { balance: '0', credit: '', date: Date.today.to_s, debit: '5' }])
-      end
-    end
-
-    it 'If there is no deposit or withdrawal, the user will see this message' do
-      account = Account.new
-      expect(account.transaction_history).to eq('No deposit or withdrawal')
-    end
-  end
-
   context 'Print statement' do
     it 'Print statement returns formatted transaction history as a hash in reverse order' do
       account = Account.new

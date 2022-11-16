@@ -43,15 +43,6 @@ class Account
   def display_balance
     "Your current balance is £#{balance}"
   end
-
-  def transaction_history
-    if @deposit_amount.positive? || @withdraw_amount.positive?
-      @transaction_history
-    else
-      'No deposit or withdrawal'
-    end
-  end
-
   def print_statement
     raise "Current balance is £#{balance}, there are no transactions to display" if @transaction_history.empty?
 
