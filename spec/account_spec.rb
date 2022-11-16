@@ -115,16 +115,16 @@ RSpec.describe 'Account' do
       account = Account.new
       account.deposit(100)
       account.withdraw(75)
-      expect(account.print_statement).to eq([{:balance=>"25", :credit=>"", :date=>"2022-11-16", :debit=>"75"},
-                                             {:balance=>"100", :credit=>"100", :date=>"2022-11-16", :debit=>""}])
+      expect(account.print_statement).to eq([{:balance=>"25", :credit=>"", :date=>Date.today.to_s, :debit=>"75"},
+                                             {:balance=>"100", :credit=>"100", :date=>Date.today.to_s, :debit=>""}])
     end
 
     it 'Second test: Print statement returns formatted transaction history as a hash in reverse order' do
       account = Account.new
       account.deposit(500)
       account.withdraw(20)
-      expect(account.print_statement).to eq([{:balance=>"480", :credit=>"", :date=>"2022-11-16", :debit=>"20"},
-                                              {:balance=>"500", :credit=>"500", :date=>"2022-11-16", :debit=>""}])
+      expect(account.print_statement).to eq([{:balance=>"480", :credit=>"", :date=>Date.today.to_s, :debit=>"20"},
+                                              {:balance=>"500", :credit=>"500", :date=>Date.today.to_s, :debit=>""}])
     end
 
     it 'Raises an error message if the withdraw amount is negative' do

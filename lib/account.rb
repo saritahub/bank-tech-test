@@ -72,7 +72,7 @@ class Account
   end
 
   def write_line(hash)
-    str = hash.keys.map { |k| hash[k].ljust(@columns[k][:width]) }.join('|| ')
+    str = hash.keys.map { |key| hash[key].ljust(@columns[key][:width]) }.join('|| ')
     puts str
   end
 end
