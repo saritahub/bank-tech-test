@@ -22,7 +22,9 @@ class Account
   end
 
   def withdraw(withdraw_amount)
-    raise 'Please enter a numerical value above 0.01.' if withdraw_amount.class != Integer || withdraw_amount.negative?
+    if withdraw_amount.class != Integer || withdraw_amount.negative?
+      raise "Please enter a numerical value above 0.01 and less than your current balance: £#{balance}."
+    end
 
     @withdraw_amount = withdraw_amount
 
