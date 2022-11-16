@@ -45,6 +45,11 @@ RSpec.describe 'Account' do
         account = Account.new
         expect { account.deposit(['Array']) }.to raise_error('Please enter a numerical value above 0.')
       end
+
+      it "Raises an error message if the deposit amount is negative" do
+        account = Account.new
+        expect { account.deposit(-1) }.to raise_error('Please enter a numerical value above 0.')
+      end
     end
   end
 
@@ -122,12 +127,11 @@ RSpec.describe 'Account' do
                                              { balance: '480', credit: '', date: Date.today.to_s, debit: '20' }])
     end
 
-    context "Raises error if there are no transactions" do
-      it "Raises error if the user has not entered any deposit" do
+    context 'Raises error if there are no transactions' do
+      it 'Raises error if the user has not entered any deposit' do
         account = Account.new
-        expect{account.print_statement}.to raise_error("Current balance is £0, there are no transactions to display")
+        expect { account.print_statement }.to raise_error('Current balance is £0, there are no transactions to display')
       end
-
     end
   end
 end
