@@ -93,19 +93,19 @@ RSpec.describe 'Account' do
     context 'Checks to see if the user has sufficient funds' do
       it "If the user's balance is zero, returns message to user: Insufficient funds, current balance is 0" do
         account = Account.new
-        expect(account.withdraw(5)).to eq('Insufficient funds, current balance is 0.')
+        expect(account.withdraw(5)).to eq('Insufficient funds, current balance is £0.')
       end
 
-      it 'If the user does not have sufficient funds, but the balance is above 0, prompts the user to make a withdrawal between 0.01 and current balance' do
+      it 'If the user does not have sufficient funds, but the balance is above 0, prompts the user to make a withdrawal between £0.01 and current balance' do
         account = Account.new
         account.deposit(10)
-        expect(account.withdraw(50)).to eq('Insufficient funds, current balance is 10. You can withdraw between 0.01 - 10')
+        expect(account.withdraw(50)).to eq('Insufficient funds, current balance is £10. You can withdraw between £0.01 - £10')
       end
 
       it 'When the balance is 90 and the user tries to withdraw 100, it prompts to withdraw under 90' do
         account = Account.new
         account.deposit(90)
-        expect(account.withdraw(100)).to eq('Insufficient funds, current balance is 90. You can withdraw between 0.01 - 90')
+        expect(account.withdraw(100)).to eq('Insufficient funds, current balance is £90. You can withdraw between £0.01 - £90')
       end
     end
   end
@@ -115,19 +115,19 @@ RSpec.describe 'Account' do
       account = Account.new
       account.deposit(100)
       account.withdraw(75)
-      expect(account.print_statement).to eq([{ balance: '100', credit: '100', date: Date.today.to_s, debit: '' },
-                                             { balance: '25', credit: '', date: Date.today.to_s, debit: '75' }])
+      expect(account.print_statement).to eq([{:balance=>"25", :credit=>"", :date=>"2022-11-16", :debit=>"75"},
+                                             {:balance=>"100", :credit=>"100", :date=>"2022-11-16", :debit=>""}])
     end
 
     it 'Second test: Print statement returns formatted transaction history as a hash in reverse order' do
       account = Account.new
       account.deposit(500)
       account.withdraw(20)
-      expect(account.print_statement).to eq([{ balance: '500', credit: '500', date: Date.today.to_s, debit: '' },
-                                             { balance: '480', credit: '', date: Date.today.to_s, debit: '20' }])
+      expect(account.print_statement).to eq([{:balance=>"480", :credit=>"", :date=>"2022-11-16", :debit=>"20"},
+                                              {:balance=>"500", :credit=>"500", :date=>"2022-11-16", :debit=>""}])
     end
 
-    it 'Raises an error message if the deposit amount is negative' do
+    it 'Raises an error message if the withdraw amount is negative' do
       account = Account.new
       account.deposit(100)
       expect { account.withdraw(-1) }.to raise_error('Please enter a numerical value above 0.01.')

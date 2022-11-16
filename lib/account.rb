@@ -42,16 +42,16 @@ class Account
 
     create_columns
     write_header
-    @transaction_history.each { |hash| write_line(hash) }
+    @transaction_history.reverse.each { |hash| write_line(hash) }
   end
 
   private
 
   def withdraw_conditions
     if @balance.sum <= 0
-      'Insufficient funds, current balance is 0.'
+      'Insufficient funds, current balance is £0.'
     elsif @withdraw_amount > @balance.sum
-      "Insufficient funds, current balance is #{balance}. You can withdraw between 0.01 - #{balance}"
+      "Insufficient funds, current balance is £#{balance}. You can withdraw between £0.01 - £#{balance}"
     else
       @balance << (-@withdraw_amount)
       @transaction_history << { date: @date_today, credit: '', debit: @withdraw_amount.to_s, balance: balance.to_s }
