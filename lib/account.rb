@@ -25,6 +25,29 @@ class Account
     raise 'Please enter a numerical value.' if withdraw_amount.class != Integer
 
     @withdraw_amount = withdraw_amount
+
+    withdraw_conditions
+  end
+
+  def balance
+    @balance.sum
+  end
+
+  def display_balance
+    "Your current balance is £#{balance}"
+  end
+
+  def print_statement
+    raise "Current balance is £#{balance}, there are no transactions to display" if @transaction_history.empty?
+
+    create_columns
+    write_header
+    @transaction_history.each { |hash| write_line(hash) }
+  end
+
+  private
+
+  def withdraw_conditions
     if @balance.sum <= 0
       'Insufficient funds, current balance is 0.'
     elsif @withdraw_amount > @balance.sum
@@ -35,23 +58,6 @@ class Account
       "You have withdrawn £#{@withdraw_amount}, current balance: £#{balance}"
     end
   end
-
-  def balance
-    @balance.sum
-  end
-
-  def display_balance
-    "Your current balance is £#{balance}"
-  end
-  def print_statement
-    raise "Current balance is £#{balance}, there are no transactions to display" if @transaction_history.empty?
-
-    create_columns
-    write_header
-    @transaction_history.each { |hash| write_line(hash) }
-  end
-
-  private
 
   def create_columns
     @columns = { date: 'Date', credit: 'Credit', debit: 'Debit',
