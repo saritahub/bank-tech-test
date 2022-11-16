@@ -5,7 +5,7 @@ This project was built using Ruby.
 - To ensure readable and clean code, the SOLID principles were used throughout. 
 - TDD approach.
 - Testing technology is RSpec. 
-- Rubocop implemented with no offences </br>
+- Rubocop implemented with no offences: </br>
 ![](images/rubocop_image.jpeg)
 
 ### To run this on your machine
@@ -167,7 +167,7 @@ I’d like to be able to view my balance
   So that I can keep track of my account balance,<br />
   I’d like to be able to view my balance after making a withdrawals and deposits
 
-### Print statement* [see below](Known-bug:-print_statement method)
+### Print statement* [see below](https://github.com/saritahub/bank-tech-test#known-bug-print_statement-method)
 - [ ] 10<br />
 As a user,<br />
 So that I can keep track of my deposits, withdrawals and balance,<br />
